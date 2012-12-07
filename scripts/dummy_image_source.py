@@ -2,6 +2,9 @@
 import roslib; roslib.load_manifest('dummy_image_source')
 import rospy
 from sensor_msgs.msg import CompressedImage
+import glob
+import os
+from random import choice
 
 import config
 
@@ -31,6 +34,14 @@ def dummy_image_source():
         if rospy.has_param('sleep_time'):
             sleep_time = rospy.get_param('sleep_time')
         rospy.sleep(sleep_time)
+
+def load_image(image):
+    return open(image, 'rb')
+
+def random_image_from_dir(directory):
+    path = os.path.normpath(directory) + os.sep
+    images = glob.glob(path + '*.jpg')
+    return load_image(choice(image))
 
 if __name__ == '__main__':
     try:
