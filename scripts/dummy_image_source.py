@@ -11,7 +11,7 @@ import math
 import config
 
 def dummy_image_source():
-    pub = rospy.Publisher('dummy_images', CompressedImage)
+    pub = rospy.Publisher('dummy_images/compressed', CompressedImage)
     rospy.init_node('dummy_image_source')
     while not rospy.is_shutdown():
 
@@ -42,7 +42,7 @@ def load_image(image):
 def random_image_from_dir(directory):
     path = os.path.normpath(directory) + os.sep
     images = glob.glob(path + '*.jpg')
-    return load_image(choice(image))
+    return load_image(choice(images))
 
 def publish_image(pub, image_handle):
     image = CompressedImage()
